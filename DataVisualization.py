@@ -1,5 +1,4 @@
 from plotly.subplots import make_subplots
-from hashlib import new
 import plotly.graph_objects as go
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
@@ -208,6 +207,7 @@ def WeatherDistributionColumn(DataFrame):
 
 # ---------------------------------------------------Box Plot of Year Column Against Numbers of Bikes (Casual, Registerd, Cnt)
 
+
 def DrawChartYearAgainstCRC(DataFrame):
     if type(DataFrame).__name__ != "DataFrame":
         raise Exception("Oops! It is Not a DataFrame")
@@ -217,8 +217,8 @@ def DrawChartYearAgainstCRC(DataFrame):
         subplot_titles=("Casual vs Year", "Registered vs Year", "Cnt vs Year")
     )
     DataFrame['yr'].replace({0: "2011", 1: "2012"}, inplace=True)
-    fig.add_trace(go.Box(x=DataFrame['yr'], 
-                  y=DataFrame['casual'],marker_color='purple'), row=1, col=1)
+    fig.add_trace(go.Box(x=DataFrame['yr'],
+                  y=DataFrame['casual'], marker_color='purple'), row=1, col=1)
     fig.add_trace(go.Box(x=DataFrame['yr'],
                   y=DataFrame['registered']), row=1, col=2)
     fig.add_trace(go.Box(x=DataFrame['yr'],
@@ -234,9 +234,9 @@ def DrawChartYearAgainstCRC(DataFrame):
     return fig
 
 # DrawChartYearAgainstCRC(newdf)
- #----------------------------------------------------------------------------------------------------- 
+ # -----------------------------------------------------------------------------------------------------
 
-#---------------------Box Plot of Season Column againt Numbers of Bikes (Casual, Registerd, Cnt)--------
+# ---------------------Box Plot of Season Column againt Numbers of Bikes (Casual, Registerd, Cnt)--------
 
 
 def DrawChartSeasonsAgainstCRC(DataFrame):
@@ -245,9 +245,13 @@ def DrawChartSeasonsAgainstCRC(DataFrame):
     fig = make_subplots(
         rows=1,
         cols=3,
-        subplot_titles=("Casual vs Season", "Registered vs Season", "Cnt vs Season")
+        subplot_titles=("Casual vs Season",
+                        "Registered vs Season", "Cnt vs Season")
     )
-    DataFrame['season'].replace({1: "Winter", 2: "Spring", 3:"Summer", 4:"Fall"}, inplace=True)
+    DataFrame['season'].replace({1: "Winter",
+                                 2: "Spring",
+                                 3: "Summer",
+                                 4: "Fall"}, inplace=True)
     fig.add_trace(go.Box(x=DataFrame['season'],
                   y=DataFrame['casual'], marker_color='purple'), row=1, col=1)
     fig.add_trace(go.Box(x=DataFrame['season'],
@@ -268,12 +272,23 @@ def DrawChartSeasonsAgainstCRC(DataFrame):
 # -------------------------------------------------------------------------------------------------
 # ------------------------------Box Plot of Monts against Numbers of Bikes (Casual)----------------
 
+
 def DrawChartMonthsAgianstCasual(Dataframe):
     if type(DataFrame).__name__ != "DataFrame":
         raise Exception("Oops! It is Not a DataFrame")
-    
-    DataFrame['mnth'].replace({1:'Jan', 2:'Feb', 3:'Mar', 4:'Apr', 5:'May', 6:'Jun', 7:'Jul',
-                                 8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec'}, inplace=True)
+
+    DataFrame['mnth'].replace({1: 'Jan',
+                               2: 'Feb',
+                               3: 'Mar',
+                               4: 'Apr',
+                               5: 'May',
+                               6: 'Jun',
+                               7: 'Jul',
+                               8: 'Aug',
+                               9: 'Sep',
+                               10: 'Oct',
+                               11: 'Nov',
+                               12: 'Dec'}, inplace=True)
     fig = go.Figure()
     fig.add_trace(
         go.Box(x=DataFrame['mnth'], y=DataFrame['casual'], marker_color='olive'))
@@ -291,8 +306,18 @@ def DrawChartMonthsAgianstRegistered(Dataframe):
     if type(DataFrame).__name__ != "DataFrame":
         raise Exception("Oops! It is Not a DataFrame")
 
-    DataFrame['mnth'].replace({1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun', 7: 'Jul',
-                               8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec'}, inplace=True)
+    DataFrame['mnth'].replace({1: 'Jan',
+                               2: 'Feb',
+                               3: 'Mar',
+                               4: 'Apr',
+                               5: 'May',
+                               6: 'Jun',
+                               7: 'Jul',
+                               8: 'Aug',
+                               9: 'Sep',
+                               10: 'Oct',
+                               11: 'Nov',
+                               12: 'Dec'}, inplace=True)
     fig = go.Figure()
     fig.add_trace(
         go.Box(x=DataFrame['mnth'], y=DataFrame['registered'], marker_color='blue'))
@@ -304,15 +329,25 @@ def DrawChartMonthsAgianstRegistered(Dataframe):
 # DrawChartMonthsAgianstRegistered(newdf)
 # -----------------------------------------------------------------------------------------------------
 
-# ------------------------------Box Plot of Monts against Numbers of Bikes (Registered+Casual)----------------
+# ------------------------------Box Plot of Months against Numbers of Bikes (Registered+Casual)----------------
 
 
 def DrawChartMonthsAgianstCnt(Dataframe):
     if type(DataFrame).__name__ != "DataFrame":
         raise Exception("Oops! It is Not a DataFrame")
 
-    DataFrame['mnth'].replace({1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun', 7: 'Jul',
-                               8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec'}, inplace=True)
+    DataFrame['mnth'].replace({1: 'Jan',
+                               2: 'Feb',
+                               3: 'Mar',
+                               4: 'Apr',
+                               5: 'May',
+                               6: 'Jun',
+                               7: 'Jul',
+                               8: 'Aug',
+                               9: 'Sep',
+                               10: 'Oct',
+                               11: 'Nov',
+                               12: 'Dec'}, inplace=True)
     fig = go.Figure()
     fig.add_trace(
         go.Box(x=DataFrame['mnth'], y=DataFrame['cnt'], marker_color='purple'))
@@ -323,3 +358,320 @@ def DrawChartMonthsAgianstCnt(Dataframe):
 
 # DrawChartMonthsAgianstCnt(newdf)
 # -----------------------------------------------------------------------------------------------------
+
+
+# ----------------------------------------------Box Plot Weekdays againts Numbers of Bikes(Casual)
+
+def DrawChartWeekdayAgianstCasual(Dataframe):
+    if type(DataFrame).__name__ != "DataFrame":
+        raise Exception("Oops! It is Not a DataFrame")
+
+    DataFrame['weekday'].replace({0: 'Sunday',
+                                  1: 'Monday',
+                                  2: 'Tuesday',
+                                  3: 'Wednesday',
+                                  4: 'Thursday',
+                                  5: 'Friday',
+                                  6: 'Saturday'
+                                  }, inplace=True)
+    fig = go.Figure()
+    fig.add_trace(
+        go.Box(x=DataFrame['weekday'], y=DataFrame['casual'], marker_color='teal'))
+    fig.update_layout(title_text='Box Plot Of Days of Week aginst Numbers of Bikes (Casual)',
+                      title_x=0.7, height=700, width=1200)
+    return fig
+
+# DrawChartWeekdayAgianstCasual(newdf)
+# ---------------------------------------------------------------------------------------------------------
+
+# ----------------------------------------------Box Plot Weekdays againts Numbers of Bikes(Registered)
+
+
+def DrawChartWeekdayAgianstRegisterd(Dataframe):
+    if type(DataFrame).__name__ != "DataFrame":
+        raise Exception("Oops! It is Not a DataFrame")
+
+    DataFrame['weekday'].replace({0: 'Sunday', 1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday', 6: 'Saturday'
+                                  }, inplace=True)
+    fig = go.Figure()
+    fig.add_trace(
+        go.Box(x=DataFrame['weekday'], y=DataFrame['registered'], marker_color='salmon'))
+    fig.update_layout(title_text='Box Plot Of Days of Week aginst Numbers of Bikes (Registered)',
+                      title_x=0.7, height=700, width=1200)
+    return fig
+
+# DrawChartWeekdayAgianstRegisterd(newdf)
+# ---------------------------------------------------------------------------------------------------------
+
+
+# ----------------------------------------------Box Plot Weekdays againts Numbers of Bikes(Cnt -> Total Bikes)
+
+
+def DrawChartWeekdayAgianstCnt(Dataframe):
+    if type(DataFrame).__name__ != "DataFrame":
+        raise Exception("Oops! It is Not a DataFrame")
+
+    DataFrame['weekday'].replace({0: 'Sunday', 1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday', 6: 'Saturday'
+                                  }, inplace=True)
+    fig = go.Figure()
+    fig.add_trace(
+        go.Box(x=DataFrame['weekday'], y=DataFrame['cnt'], marker_color='royalblue'))
+    fig.update_layout(title_text='Box Plot Of Days of Week aginst Numbers of Bikes (Total)',
+                      title_x=0.7, height=700, width=1200)
+    return fig
+
+# DrawChartWeekdayAgianstCnt(newdf)
+# ---------------------------------------------------------------------------------------------------------
+
+# ---------------------Box Plot of Holidays Column againt Numbers of Bikes (Casual, Registerd, Cnt)--------
+
+
+def DrawChartHolidayDayAgainstCRC(DataFrame):
+    if type(DataFrame).__name__ != "DataFrame":
+        raise Exception("Oops! It is Not a DataFrame")
+
+    fig = make_subplots(
+        rows=1,
+        cols=3,
+        subplot_titles=("Casual vs Holiday",
+                        "Registered vs Holiday", "Cnt vs Holiday")
+    )
+    DataFrame['holiday'].replace(
+        {0: "Working Day",
+         1: "Holiday"},
+        inplace=True)
+    fig.add_trace(go.Box(x=DataFrame['holiday'],
+                  y=DataFrame['casual'], marker_color='brown'), row=1, col=1)
+    fig.add_trace(go.Box(x=DataFrame['holiday'],
+                  y=DataFrame['registered'], marker_color='blue'), row=1, col=2)
+    fig.add_trace(go.Box(x=DataFrame['holiday'],
+                  y=DataFrame['cnt'], marker_color='purple'), row=1, col=3)
+    fig.update_layout(title_text='Chart of Bikes(Casual, Registered, total) vs Holiday',
+                      title_x=0.5, height=500, showlegend=False)
+    fig.update_xaxes(title_text="Holiday", row=1, col=1)
+    fig.update_xaxes(title_text="Holiday", row=1, col=2)
+    fig.update_xaxes(title_text="Holiday", row=1, col=3)
+    fig.update_yaxes(title_text="Casual", row=1, col=1)
+    fig.update_yaxes(title_text="Registered", row=1, col=2)
+    fig.update_yaxes(title_text="cnt", row=1, col=3)
+    return fig
+
+# DrawChartHolidayDayAgainstCRC(newdf)
+
+# ------------------------------------------------------------------------------------------------------------
+
+
+# ---------------------Box Plot of Workingday Column againt Numbers of Bikes (Casual, Registerd, Cnt)--------
+
+def DrawChartWorkingDayAgainstCRC(DataFrame):
+    if type(DataFrame).__name__ != "DataFrame":
+        raise Exception("Oops! It is Not a DataFrame")
+
+    fig = make_subplots(
+        rows=1,
+        cols=3,
+        subplot_titles=("Casual vs WorkingDay",
+                        "Registered vs WorkingDay",
+                        "Cnt vs WorkingDay")
+    )
+    DataFrame['workingday'].replace(
+        {0: "Off Day(Including Holidays)",
+         1: "Working Day"},
+        inplace=True)
+    fig.add_trace(go.Box(x=DataFrame['workingday'],
+                  y=DataFrame['casual'], marker_color='brown'), row=1, col=1)
+    fig.add_trace(go.Box(x=DataFrame['workingday'],
+                  y=DataFrame['registered'], marker_color='blue'), row=1, col=2)
+    fig.add_trace(go.Box(x=DataFrame['workingday'],
+                  y=DataFrame['cnt'], marker_color='purple'), row=1, col=3)
+    fig.update_layout(title_text='Chart of Bikes(Casual, Registered, total) vs Working Day',
+                      title_x=0.5, height=500, showlegend=False)
+    fig.update_xaxes(title_text="Working Day", row=1, col=1)
+    fig.update_xaxes(title_text="Working Day", row=1, col=2)
+    fig.update_xaxes(title_text="Working Day", row=1, col=3)
+    fig.update_yaxes(title_text="Casual", row=1, col=1)
+    fig.update_yaxes(title_text="Registered", row=1, col=2)
+    fig.update_yaxes(title_text="cnt", row=1, col=3)
+    return fig
+
+
+# DrawChartWorkingDayAgainstCRC(newdf)
+
+# -------------------------------------------------------------------------------------------------------------------
+
+# ---------------------Box Plot of Weathersit  Column againt Numbers of Bikes (Casual, Registerd, Cnt)--------
+
+def DrawChartWeathersitAgainstCRC(DataFrame):
+    if type(DataFrame).__name__ != "DataFrame":
+        raise Exception("Oops! It is Not a DataFrame")
+
+    fig = make_subplots(
+        rows=1,
+        cols=3,
+        subplot_titles=("Casual vs Weathersit",
+                        "Registered vs Weathersit", "Cnt vs Weathersit")
+    )
+    DataFrame['weathersit'].replace(
+        {1: "Clear",
+         2: "Mist",
+         3: "Light Snow",
+         4: "Heavy Rain"},
+        inplace=True)
+    fig.add_trace(go.Box(x=DataFrame['weathersit'],
+                  y=DataFrame['casual'], marker_color='brown'), row=1, col=1)
+    fig.add_trace(go.Box(x=DataFrame['weathersit'],
+                  y=DataFrame['registered'], marker_color='blue'), row=1, col=2)
+    fig.add_trace(go.Box(x=DataFrame['weathersit'],
+                  y=DataFrame['cnt'], marker_color='purple'), row=1, col=3)
+    fig.update_layout(title_text='Chart of Bikes(Casual, Registered, total) vs Weathersit',
+                      title_x=0.5, height=500, showlegend=False)
+    fig.update_xaxes(title_text="Weathersit", row=1, col=1)
+    fig.update_xaxes(title_text="Weathersit", row=1, col=2)
+    fig.update_xaxes(title_text="Weathersit", row=1, col=3)
+    fig.update_yaxes(title_text="Casual", row=1, col=1)
+    fig.update_yaxes(title_text="Registered", row=1, col=2)
+    fig.update_yaxes(title_text="cnt", row=1, col=3)
+    return fig
+
+
+# DrawChartWeathersitAgainstCRC(newdf)
+
+# -----------------------------------------------------------------------------------------------------------
+
+# -----------------------------------------Scatter-Plot of Temperature against Numbers of Bikes (Casual, Registerd, Cnt)---------------
+
+def DrawScatterPlotTempAgainstCRC(DataFrame):
+    if type(DataFrame).__name__ != "DataFrame":
+        raise Exception("Oops! It is Not a DataFrame")
+
+    fig = make_subplots(
+        rows=1, cols=3,
+        subplot_titles=("Casual vs Temperature",
+                        "Registered vs Temperature",
+                        "Cnt vs Temperature"))
+    fig.add_trace(go.Scatter(
+        x=DataFrame['temp'], y=DataFrame['casual'], mode='markers'), row=1, col=1)
+    fig.add_trace(go.Scatter(
+        x=DataFrame['temp'], y=DataFrame['registered'], mode='markers'), row=1, col=2)
+    fig.add_trace(go.Scatter(
+        x=DataFrame['temp'], y=DataFrame['cnt'], mode='markers'), row=1, col=3)
+    fig.update_layout(title_text='Chart of Bikes(Casual, Registered, total) vs Temperature',
+                      title_x=0.5, height=600, showlegend=False)
+    fig.update_xaxes(title_text="Temperature", row=1, col=1)
+    fig.update_xaxes(title_text="Temperature", row=1, col=2)
+    fig.update_xaxes(title_text="Temperature", row=1, col=3)
+    fig.update_yaxes(title_text="Casual Bike", row=1, col=1)
+    fig.update_yaxes(title_text="Registered Bike", row=1, col=2)
+    fig.update_yaxes(title_text="Cnt Total Bike", row=1, col=3)
+    return fig
+
+
+# DrawScatterPlotTempAgainstCRC(newdf)
+# -----------------------------------------------------------------------------------------------------------------
+
+# By Using Dofferent Temperature
+# -----------------------------------------Scatter-Plot of Temperature against Numbers of Bikes (Casual, Registerd, Cnt)---------------
+
+
+def DrawScatterPlotATempAgainstCRC(DataFrame):
+    if type(DataFrame).__name__ != "DataFrame":
+        raise Exception("Oops! It is Not a DataFrame")
+
+    fig = make_subplots(
+        rows=1, cols=3,
+        subplot_titles=("Casual vs Temperature",
+                        "Registered vs Temperature",
+                        "Cnt vs Temperature"))
+    fig.add_trace(go.Scatter(
+        x=DataFrame['atemp'], y=DataFrame['casual'], mode='markers'), row=1, col=1)
+    fig.add_trace(go.Scatter(
+        x=DataFrame['atemp'], y=DataFrame['registered'], mode='markers'), row=1, col=2)
+    fig.add_trace(go.Scatter(
+        x=DataFrame['atemp'], y=DataFrame['cnt'], mode='markers'), row=1, col=3)
+    fig.update_layout(title_text='Chart of Bikes(Casual, Registered, total) vs A Temperature',
+                      title_x=0.5, height=600, showlegend=False)
+    fig.update_xaxes(
+        title_text="Temperature ((t-t_min)/(t_max-t_min))", row=1, col=1)
+    fig.update_xaxes(
+        title_text="Temperature ((t-t_min)/(t_max-t_min)", row=1, col=2)
+    fig.update_xaxes(
+        title_text="Temperature ((t-t_min)/(t_max-t_min)", row=1, col=3)
+    fig.update_yaxes(title_text="Casual Bike", row=1, col=1)
+    fig.update_yaxes(title_text="Registered Bike", row=1, col=2)
+    fig.update_yaxes(title_text="Cnt Total Bike", row=1, col=3)
+    return fig
+
+
+# DrawScatterPlotATempAgainstCRC(newdf)
+# -----------------------------------------------------------------------------------------------------------------
+
+
+# -----------------------------------------Scatter-Plot of Humidity against Numbers of Bikes (Casual, Registerd, Cnt)---------------
+
+def DrawScatterPoltHumidityAgainstCRC(DataFrame):
+    if type(DataFrame).__name__ != "DataFrame":
+        raise Exception("Oops! It is Not a DataFrame")
+
+    fig = make_subplots(
+        rows=1, cols=3,
+        subplot_titles=("Casual Bikes vs Humidity",
+                        "Registered Bikes vs Humidity",
+                        "Cnt Bikes vs Humidity"))
+
+    fig.add_trace(go.Scatter(
+        x=DataFrame['hum'], y=DataFrame['casual'], mode='markers'), row=1, col=1)
+    fig.add_trace(go.Scatter(
+        x=DataFrame['hum'], y=DataFrame['registered'], mode='markers'), row=1, col=2)
+    fig.add_trace(go.Scatter(
+        x=DataFrame['hum'], y=DataFrame['cnt'], mode='markers'), row=1, col=3)
+    fig.update_layout(title_text='Chart of Bikes(Casual, Registered, total) vs Humidity',
+                      title_x=0.5, height=600, showlegend=False)
+    fig.update_xaxes(
+        title_text="Humidity", row=1, col=1)
+    fig.update_xaxes(
+        title_text="Humidity", row=1, col=2)
+    fig.update_xaxes(
+        title_text="Humidity", row=1, col=3)
+    fig.update_yaxes(title_text="Casual Bike", row=1, col=1)
+    fig.update_yaxes(title_text="Registered Bike", row=1, col=2)
+    fig.update_yaxes(title_text="Cnt Total Bike", row=1, col=3)
+    return fig.show()
+
+# DrawScatterPoltHumidityAgainstCRC(newdf)
+
+# ---------------------------------------------------------------------------------------------------------
+
+
+# -----------------------------------------Scatter-Plot of WindSpeed against Numbers of Bikes (Casual, Registerd, Cnt)---------------
+def DrawScatterPoltWindSpeedAgainstCRC(DataFrame):
+    if type(DataFrame).__name__ != "DataFrame":
+        raise Exception("Oops! It is Not a DataFrame")
+
+    fig = make_subplots(
+        rows=1, cols=3,
+        subplot_titles=("Casual Bikes vs WindSpeed",
+                        "Registered Bikes vs WindSpeed",
+                        "Cnt Bikes vs WindSpeed"))
+
+    fig.add_trace(go.Scatter(
+        x=DataFrame['windspeed'], y=DataFrame['casual'], mode='markers'), row=1, col=1)
+    fig.add_trace(go.Scatter(
+        x=DataFrame['windspeed'], y=DataFrame['registered'], mode='markers'), row=1, col=2)
+    fig.add_trace(go.Scatter(
+        x=DataFrame['windspeed'], y=DataFrame['cnt'], mode='markers'), row=1, col=3)
+    fig.update_layout(title_text='Chart of Bikes(Casual, Registered, total) vs Windspeed',
+                      title_x=0.5, height=600, showlegend=False)
+    fig.update_xaxes(
+        title_text="Windspeed", row=1, col=1)
+    fig.update_xaxes(
+        title_text="Windspeed", row=1, col=2)
+    fig.update_xaxes(
+        title_text="Windspeed", row=1, col=3)
+    fig.update_yaxes(title_text="Casual Bike", row=1, col=1)
+    fig.update_yaxes(title_text="Registered Bike", row=1, col=2)
+    fig.update_yaxes(title_text="Cnt Total Bike", row=1, col=3)
+    return fig.show()
+
+
+DrawScatterPoltWindSpeedAgainstCRC(newdf)
+# ---------------------------------------------------------------------------------------------------------------------------
