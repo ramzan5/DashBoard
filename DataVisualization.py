@@ -23,7 +23,7 @@ def DrawCorrelationHeatMap(DataFrame):
                                         'temp', 'atemp', 'hum', 'windspeed', 'casual', 'registered', 'cnt'],
                                     colorscale='Inferno'
                                     ))
-    fig.update_layout(title_text='Correlation heatmap of the dataset',
+    fig.update_layout(title_text='Correlation Heatmap of the dataset',
                       title_x=0.5,
                       height=500)
     return fig
@@ -32,7 +32,7 @@ def DrawCorrelationHeatMap(DataFrame):
 
 # --------------------------------------------------------------------------------------------------------
 
-# -----------------------------------   Display Feature Importance Chart ---------------------------------
+# -----------------------------------   Display Feature Importance ---------------------------------
 
 
 def DrawFeatureImportanceGraph(DataFrame):
@@ -41,7 +41,7 @@ def DrawFeatureImportanceGraph(DataFrame):
 
     FigImportanceFeature = go.Figure()
     FigImportanceFeature.add_trace(
-        go.Bar(x=DataFrame.index, y=DataFrame["cnt"]))
+        go.Bar(x=DataFrame.index, y=DataFrame["Importance"], marker_color='purple'))
     FigImportanceFeature.update_layout(
         title_text='Feature Contribution in The Model',
         title_x=0.5,
@@ -673,5 +673,5 @@ def DrawScatterPoltWindSpeedAgainstCRC(DataFrame):
     return fig.show()
 
 
-DrawScatterPoltWindSpeedAgainstCRC(newdf)
+# DrawScatterPoltWindSpeedAgainstCRC(newdf)
 # ---------------------------------------------------------------------------------------------------------------------------
