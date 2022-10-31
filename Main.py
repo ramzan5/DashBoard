@@ -112,6 +112,7 @@ FeatureImportanceForCnt = FeatureImportanceForCnt.sort_values(
     "Importance", ascending=False
 )
 
+
 # ----------------------Features Importance Figure for Casual Bike--------------------------------
 FetureImportanceFigureForCasualBikes = dv.DrawFeatureImportanceGraph(
     FeatureImportanceForCasual)
@@ -127,6 +128,10 @@ FetureImportanceFigureForCntBikes = dv.DrawFeatureImportanceGraph(
 # -------------------------------- Figure For HeatMap---------------------------------------------------
 CorrelationFigureForHeatMap = dv.DrawCorrelationHeatMap(UpdatedDataFrame)
 
+# -----------------------------------Box Plot for Casual Registered and Total Bikes
+
+BoxPlotFigureForCasualRegisteredAndCnt = dv.BoxPlotForCasualRegisteredAndTotalBikes(
+    UpdatedDataFrame)
 
 # Details for Casual Bikes Model
 
@@ -269,7 +274,7 @@ CasualBikeDisplayComponent = html.Div([
                     html.H3(SliderForWorkingDayLabel, className='heading'),
                     dcc.Slider(
                         id='sliderforWorkingday', className='slider',
-                        min=SliderForWorkingDayMinValue, max=SliderForWorkingDayMaxValue, value=SliderForWorkingDayMeanValue,
+                        min=SliderForWorkingDayMinValue, max=SliderForWorkingDayMaxValue, value=0.5,
                         marks={i: '{}'.format(i) for i in range(
                             SliderForWorkingDayMinValue, SliderForWorkingDayMaxValue+1)}
                     ),
@@ -280,7 +285,7 @@ CasualBikeDisplayComponent = html.Div([
                     html.H3(SliderForTemp, className='heading'),
                     dcc.Slider(
                         id='sliderforTemp', className='slider',
-                        min=SliderForTempMinValue, max=SliderForTempMaxValue, value=SliderForTempMeanValue,
+                        min=SliderForTempMinValue, max=SliderForTempMaxValue, value=0.30,
                         marks={i: '{}'.format(i) for i in range(
                             SliderForTempMaxValue, SliderForTempMaxValue+1)}
                     ),
@@ -291,7 +296,7 @@ CasualBikeDisplayComponent = html.Div([
                     html.H3(SliderForATemp, className='heading'),
                     dcc.Slider(
                         id='sliderforATemp', className='slider',
-                        min=SliderForATempMinValue, max=SliderForATempMaxValue, value=SliderForATempMeanValue,
+                        min=SliderForATempMinValue, max=SliderForATempMaxValue, value=0.75,
                         marks={i: '{}'.format(i) for i in range(
                             SliderForATempMaxValue, SliderForATempMaxValue+1)}
                     ),
@@ -302,7 +307,7 @@ CasualBikeDisplayComponent = html.Div([
                     html.H3(SliderForHum, className='heading'),
                     dcc.Slider(
                         id='sliderforhum', className='slider',
-                        min=SliderForHumMinValue, max=SliderForHumMaxValue, value=SliderForHumMeanValue,
+                        min=SliderForHumMinValue, max=SliderForHumMaxValue, value=0.49,
                         marks={i: '{}'.format(i) for i in range(
                             SliderForHumMinValue, SliderForHumMaxValue+1)}
                     ),
@@ -389,7 +394,7 @@ RegisteredBikeDisplayComponent = html.Div([
                      html.H3(SliderForYear, className='heading'),
                      dcc.Slider(
                          id='sliderforyear', className='slider',
-                         min=SliderForYearMinValue, max=SliderForYearMaxValue, value=SliderForYearMeanValue,
+                         min=SliderForYearMinValue, max=SliderForYearMaxValue, value=0.75,
                          marks={i: '{}'.format(i) for i in range(
                             SliderForYearMinValue, SliderForYearMaxValue+1)}
                      ),
@@ -400,7 +405,7 @@ RegisteredBikeDisplayComponent = html.Div([
                     html.H3(SliderForTemp1, className='heading'),
                     dcc.Slider(
                         id='sliderforTemp1', className='slider',
-                        min=SliderForTempMinValue1, max=SliderForTempMaxValue1, value=SliderForTempMeanValue1,
+                        min=SliderForTempMinValue1, max=SliderForTempMaxValue1, value=0.6,
                         marks={i: '{}'.format(i) for i in range(
                             SliderForTempMinValue1, SliderForTempMaxValue1+1)}
                     ),
@@ -411,7 +416,7 @@ RegisteredBikeDisplayComponent = html.Div([
                     html.H3(SliderForATemp1, className='heading'),
                     dcc.Slider(
                         id='sliderforATemp1', className='slider',
-                        min=SliderForATempMinValue1, max=SliderForATempMaxValue1, value=SliderForATempMeanValue1,
+                        min=SliderForATempMinValue1, max=SliderForATempMaxValue1, value=0.5,
                         marks={i: '{}'.format(i) for i in range(
                             SliderForATempMinValue1, SliderForATempMaxValue1+1)}
                     ),
@@ -498,7 +503,11 @@ ShowingDetailofRegistredBikesModelComponent = html.Div([
     ])
 ], className='model-information-div')
 
-
+# Component fot BoxPlot For Casual Registered and Total Bikes
+BoxPlotComponentForCasualRegisteredAndCnt = html.Div([
+    dcc.Graph(figure=BoxPlotFigureForCasualRegisteredAndCnt,
+              style={'margin': 10})
+], className='box-plot-casual-regis-cnt')
 
 # Component showing the Correlation HeatMap Figure
 
@@ -506,18 +515,88 @@ CorrelationHeatMapComponent = html.Div([
     dcc.Graph(figure=CorrelationFigureForHeatMap, style={'margin': 10})
 ], className='heat-map-plot')
 
+# Distribution Column Components
+
+# Season and year distribution Copmponent
+SeasonYearDistributionColumnComponent = html.Div([
+    html.Div([
+    dbc.Row([
+        dbc.Col([
+            html.Div([
+                dcc.Graph(figure=SeasonDistributionColumnFigure,
+                          style={'margin': 10})
+            ])
+        ], width=6),
+        dbc.Col([
+            html.Div([
+                dcc.Graph(figure=YearDistributionColumnFigure,
+                          style={'margin': 10})])
+        ], width=6)
+    ])], className="distribution-col"),
+    ], className='distribution-column')
+    
+# Component for showing the distribution Plot for months
+
+MonthsDistributionColumnComponent = html.Div([
+    dcc.Graph(figure=MonthsDistributionColumnFigure, style={'margin': 10})
+],className='Months-distribution')
+
+# Working-day and Holiday distribution column component 
+
+WorkingDayAndHolidayDistributionColumnComponent = html.Div([
+    html.Div([
+        dbc.Row([
+            dbc.Col([
+                html.Div([
+                    dcc.Graph(figure=WorkingDayDistributionColumnFigure,
+                              style={'margin': 10})
+                ])
+            ], width=6),
+            dbc.Col([
+                html.Div([
+                    dcc.Graph(figure=HolidayDistributionColumnFigure,
+                              style={'margin': 10})])
+            ], width=6)
+        ])], className="distribution-col"),
+], className='distribution-column')
+
+# Year Months Weeeksday Component 
+YearMonthWeekDayDistributionColumnComponet = html.Div([
+    dcc.Graph(figure=YearMonthWeekDayDistributionColumnFigure, style={'margin': 10})
+], className='Year-Months-weekday-distribution')
+
+# Weather Distribution Component
+
+WeatherDistributionColumnComponent = html.Div([
+    dcc.Graph(figure=WeatherDistributionColumnFigure,
+              style={'margin': 10})
+], className='weather-distribution')
 # Main Layout
-app.layout = html.Div([HeaderComponent,
+app.layout = html.Div(
+                    [
+                       HeaderComponent,
                        CasualBikeDisplayComponent,
                        ShowingDetailofCasualBikesModelComponent,
                        EmptyBoxComponent,
                        RegisteredBikeDisplayComponent,
                        ShowingDetailofRegistredBikesModelComponent,
                        EmptyBoxComponent,
+                       BoxPlotComponentForCasualRegisteredAndCnt,
+                       EmptyBoxComponent,
                        CorrelationHeatMapComponent,
                        EmptyBoxComponent,
-
-                       ], className='Main-background')
+                       SeasonYearDistributionColumnComponent,
+                       EmptyBoxComponent,
+                       MonthsDistributionColumnComponent,
+                       EmptyBoxComponent,
+                       WorkingDayAndHolidayDistributionColumnComponent,
+                       EmptyBoxComponent,
+                       YearMonthWeekDayDistributionColumnComponet,
+                       EmptyBoxComponent,
+                       WeatherDistributionColumnComponent,
+                       EmptyBoxComponent,
+                    ]
+                    , className='Main-background')
 
 
 @app.callback(
@@ -525,6 +604,8 @@ app.layout = html.Div([HeaderComponent,
     [Input("collapse-btn-casual", "n_clicks")],
     [State("collapse-row-info", "is_open")],
 )
+
+
 def toggle_collapse(n, is_open):
     if n:
         return not is_open
@@ -539,6 +620,7 @@ def toggle_collapse(n, is_open):
     [State("collapse-casual-info", "is_open")],
 )
 # checking the toggle Collapse
+
 def toggle_collapse(n, is_open):
     if n:
         return not is_open
@@ -546,10 +628,12 @@ def toggle_collapse(n, is_open):
 
 # checking for the registered Collapse
 
+
 @app.callback(
     Output("collapse-cnt-info", "is_open"),
     [Input("collapse-row-info-cnt-btn", "n_clicks")],
     [State("collapse-cnt-info", "is_open")])
+
 
 def toggle_collapse(n, is_open):
     if n:
@@ -563,22 +647,24 @@ def toggle_collapse(n, is_open):
     Output("collapse-registered-info", "is_open"),
     [Input("collapse-registered-info-btn", "n_clicks")],
     [State("collapse-registered-info", "is_open")])
+
+
 def toggle_collapse(n, is_open):
     if n:
         return not is_open
     return is_open
 
 
-
 # The Callback function Returning the Number of Casual bikes by changing different values using slider
 
 @app.callback(Output(component_id='prediction-result', component_property="children"),
-# the values corresponding to the 4 sliders by using their ids and value property
+              # the values corresponding to the 4 sliders by using their ids and value property
               [Input('sliderforWorkingday', 'value'), Input(
                   'sliderforTemp', 'value'), Input('sliderforATemp', 'value'), Input('sliderforhum', 'value')]
-)
+              )
 
-def UpadtePredictionForCasual(X1,X2,X3,X4):
+
+def UpadtePredictionForCasual(X1, X2, X3, X4):
     inputX = np.array(
         [DataFrame['season'].mean(),
          DataFrame['yr'].mean(),
@@ -592,7 +678,7 @@ def UpadtePredictionForCasual(X1,X2,X3,X4):
          X1,
          DataFrame['windspeed'].mean(),
 
-    ]).reshape(1,-1)
+         ]).reshape(1, -1)
     PredictedNumber = RegressorForCasualBikes.predict(inputX)[0]
     return "Predicted Numbers of Casual Bikes: {}".format(round(PredictedNumber, 1))
 
@@ -600,12 +686,13 @@ def UpadtePredictionForCasual(X1,X2,X3,X4):
 # The Callback function Returning the Number of Registerd bikes by changing different values using slider
 
 @app.callback(Output(component_id='prediction-result-regis', component_property="children"),
-        # the values corresponding to the 4 sliders by using their ids and value property
+              # the values corresponding to the 4 sliders by using their ids and value property
               [Input('sliderforyear', 'value'), Input(
                   'sliderforTemp1', 'value'), Input('sliderforATemp1', 'value'), Input('sliderforMnt', 'value'), Input('SliderForSeason', 'value')]
-)
+              )
 
-def UpdateThePredictionForRegistered(X1,X2,X3,X4,X5):
+
+def UpdateThePredictionForRegistered(X1, X2, X3, X4, X5):
     inputX = np.array(
         [
             X5,
@@ -621,7 +708,9 @@ def UpdateThePredictionForRegistered(X1,X2,X3,X4,X5):
             DataFrame['windspeed'].mean(),
         ]).reshape(1, -1)
     PredictedNumber = RegressorForRegisteredBikes.predict(inputX)[0]
-    return "Predicted Numbers of Casual Bikes: {}".format(round(PredictedNumber, 1))
+    return "Predicted Numbers of Registered Bikes: {}".format(round(PredictedNumber, 1))
+
+
 
 if __name__ == '__main__':
     # app.run_server(debug=True)
