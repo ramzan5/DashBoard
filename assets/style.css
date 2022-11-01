@@ -139,3 +139,17 @@
     background-color: rgb(97, 97, 97);
     border-radius: 10px;
 }
+
+.box-plot-graph{
+    height: 500px;
+    margin: 10px 15px 25px 25px;
+    background-color: rgb(97, 97, 97);
+    border-radius: 10px;
+}
+
+.scatter-plot-graph{
+    height: 600px;
+        margin: 10px 15px 25px 25px;
+        background-color: rgb(97, 97, 97);
+        border-radius: 10px;
+}
