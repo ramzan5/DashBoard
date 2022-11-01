@@ -51,7 +51,8 @@ ColumnsName = dpp.GetColumnsName(DataFrame)
 DataCorrelation = dpp.CheckCorrelation(DataFrame)
 
 # Getting the Columns Varience of given DataSet
-# DataSetVarience = dpp.CheckColumnsVarience(DataFrame)
+DataSetVarience = dpp.CheckColumnsVarience(UpdatedDataFrame)
+
 
 # Column used For the Prediction for Casual Bikes
 ColumnNameUsedForCasualBikes = ['season', 'yr', 'mnth', 'holiday', 'weekday', 'workingday', 'weathersit',
@@ -512,10 +513,11 @@ BoxPlotComponentForCasualRegisteredAndCnt = html.Div([
 # Component showing the Correlation HeatMap Figure
 
 CorrelationHeatMapComponent = html.Div([
-    dcc.Graph(figure=CorrelationFigureForHeatMap, style={'margin': 10})
+    dcc.Graph(figure=CorrelationFigureForHeatMap, 
+    style={'margin': 10})
 ], className='heat-map-plot')
 
-# Distribution Column Components
+#------------------------------------------------- Distribution Column Components
 
 # Season and year distribution Copmponent
 SeasonYearDistributionColumnComponent = html.Div([
@@ -538,7 +540,8 @@ SeasonYearDistributionColumnComponent = html.Div([
 # Component for showing the distribution Plot for months
 
 MonthsDistributionColumnComponent = html.Div([
-    dcc.Graph(figure=MonthsDistributionColumnFigure, style={'margin': 10})
+    dcc.Graph(figure=MonthsDistributionColumnFigure, 
+    style={'margin': 10})
 ],className='Months-distribution')
 
 # Working-day and Holiday distribution column component 
@@ -562,7 +565,8 @@ WorkingDayAndHolidayDistributionColumnComponent = html.Div([
 
 # Year Months Weeeksday Component 
 YearMonthWeekDayDistributionColumnComponet = html.Div([
-    dcc.Graph(figure=YearMonthWeekDayDistributionColumnFigure, style={'margin': 10})
+    dcc.Graph(figure=YearMonthWeekDayDistributionColumnFigure, 
+    style={'margin': 10})
 ], className='Year-Months-weekday-distribution')
 
 # Weather Distribution Component
@@ -571,30 +575,211 @@ WeatherDistributionColumnComponent = html.Div([
     dcc.Graph(figure=WeatherDistributionColumnFigure,
               style={'margin': 10})
 ], className='weather-distribution')
+
+# ---------------------------------------------Box plot Graphs components
+
+
+# Component for Box-Plot for year against Casual Registered and Total Bikes
+
+BoxPlotYearAgainstCRCComponent = html.Div([
+    dcc.Graph(
+        figure=FigureForDrawChartYearAgainstCRC, 
+        style={'margin': 10}
+    )
+], className='box-plot-graph')
+
+# Component for Box-Plot for Season against Casual Registered and Total Bikes
+
+BoxPlotSeasonAgainstCRCComponent = html.Div([
+    dcc.Graph(
+        figure=FigureForDrawChartSeasonsAgainstCRC, 
+        style={'margin': 10}
+    )
+], className='box-plot-graph')
+
+# Component for Box-Plot for Months against Casual
+
+BoxPlotMonthsAgainstCasualComponent = html.Div([
+    dcc.Graph(
+        figure=FigureForDrawChartMonthsAgianstCasual, 
+        style={'margin': 10}
+    )
+], className='box-plot-graph')
+
+# Component for Box-Plot for Months against Registered
+
+BoxPlotMonthsAgainstRegisteredComponent = html.Div([
+    dcc.Graph(
+        figure=FigureForDrawChartMonthsAgianstRegistered, 
+        style={'margin': 10}
+    )
+], className='box-plot-graph')
+
+
+# Component for Box-Plot for Months against TotalBikes
+
+BoxPlotMonthsAgainstCntComponent = html.Div([
+    dcc.Graph(
+        figure=FigureForDrawChartMonthsAgianstCnt, 
+        style={'margin': 10}
+    )
+], className='box-plot-graph')
+
+# Component for Box-Plot for Weekday against Casual
+
+BoxPlotWeekdayAgainstCasualComponent = html.Div([
+    dcc.Graph(
+        figure=FigureForDrawChartWeekdayAgianstCasual, 
+        style={'margin': 10}
+    )
+], className='box-plot-graph')
+
+# Component for Box-Plot for Weekday against Registered
+
+BoxPlotWeekdayAgainstRegisteredComponent = html.Div([
+    dcc.Graph(
+        figure=FigureForDrawChartWeekdayAgianstRegistered, 
+        style={'margin': 10}
+    )
+], className='box-plot-graph')
+
+
+# Component for Box-Plot for Weekday against total bikes
+
+BoxPlotWeekdayAgainstCntComponent = html.Div([
+    dcc.Graph(
+        figure=FigureForDrawChartWeekdayAgianstCasualCnt , 
+        style={'margin': 10}
+    )
+], className='box-plot-graph')
+
+# Component for Box-Plot for Holiday against Casual Registered and total bikes
+
+BoxPlotHolidayAgainstCRCComponent = html.Div([
+    dcc.Graph(
+        figure=FigureForDrawChartHolidayDayAgainstCRC,
+        style={'margin': 10}
+    )
+], className='box-plot-graph')
+
+# Component for Box-Plot for Holiday against Casual Registered and total bikes
+
+BoxPlotWorkingDayAgainstCRCComponent = html.Div([
+    dcc.Graph(
+        figure=FigureForDrawChartWorkingDayAgainstCRC,
+        style={'margin': 10}
+    )
+], className='box-plot-graph')
+
+# Component for Box-Plot for Weather Sit against Casual Registered and total bikes
+
+BoxPlotWeatherAgainstCRCComponent = html.Div([
+    dcc.Graph(
+        figure=FigureForDrawChartWeathersitAgainstCRC,
+        style={'margin': 10}
+    )
+], className='box-plot-graph')
+
+
+# ----------------------------------------------Scatter Plots Components -----------------------------------------
+
+# Scatter Plot Temp against Casual Registered and total bikes
+
+ScatterPlotTempAgainstCRCComponent = html.Div([
+    dcc.Graph(
+        figure=FigureForDrawScatterPlotTempAgainstCRC,
+        style={'margin': 10}
+    )
+], className='scatter-plot-graph')
+
+
+# Scatter Plot ATemp against Casual Registered and total bikes
+
+ScatterPlotATempAgainstCRCComponent = html.Div([
+    dcc.Graph(
+        figure=FigureForDrawScatterPlotATempAgainstCRC,
+        style={'margin': 10}
+    )
+], className='scatter-plot-graph')
+
+
+# Scatter Plot Humidity against Casual Registered and total bikes
+
+ScatterPlotHumidityAgainstCRCComponent = html.Div([
+    dcc.Graph(
+        figure=FigureForDrawScatterPoltHumidityAgainstCRC,
+        style={'margin': 10}
+    )
+], className='scatter-plot-graph')
+
+
+# Scatter Plot WindSpeed against Casual Registered and total bikes
+
+ScatterPlotWindSpeedAgainstCRCComponent = html.Div([
+    dcc.Graph(
+        figure=FigureForDrawScatterPoltWindSpeedAgainstCRC,
+        style={'margin': 10}
+    )
+], className='scatter-plot-graph')
+
+
+
 # Main Layout
+
 app.layout = html.Div(
                     [
-                       HeaderComponent,
-                       CasualBikeDisplayComponent,
-                       ShowingDetailofCasualBikesModelComponent,
-                       EmptyBoxComponent,
-                       RegisteredBikeDisplayComponent,
-                       ShowingDetailofRegistredBikesModelComponent,
-                       EmptyBoxComponent,
-                       BoxPlotComponentForCasualRegisteredAndCnt,
-                       EmptyBoxComponent,
-                       CorrelationHeatMapComponent,
-                       EmptyBoxComponent,
-                       SeasonYearDistributionColumnComponent,
-                       EmptyBoxComponent,
-                       MonthsDistributionColumnComponent,
-                       EmptyBoxComponent,
-                       WorkingDayAndHolidayDistributionColumnComponent,
-                       EmptyBoxComponent,
-                       YearMonthWeekDayDistributionColumnComponet,
-                       EmptyBoxComponent,
-                       WeatherDistributionColumnComponent,
-                       EmptyBoxComponent,
+                        HeaderComponent,
+                        CasualBikeDisplayComponent,
+                        ShowingDetailofCasualBikesModelComponent,
+                        EmptyBoxComponent,
+                        RegisteredBikeDisplayComponent,
+                        ShowingDetailofRegistredBikesModelComponent,
+                        EmptyBoxComponent,
+                        BoxPlotComponentForCasualRegisteredAndCnt,
+                        EmptyBoxComponent,
+                        CorrelationHeatMapComponent,
+                        EmptyBoxComponent,
+                        SeasonYearDistributionColumnComponent,
+                        EmptyBoxComponent,
+                        MonthsDistributionColumnComponent,
+                        EmptyBoxComponent,
+                        WorkingDayAndHolidayDistributionColumnComponent,
+                        EmptyBoxComponent,
+                        YearMonthWeekDayDistributionColumnComponet,
+                        EmptyBoxComponent,
+                        WeatherDistributionColumnComponent,
+                        EmptyBoxComponent,
+                        BoxPlotYearAgainstCRCComponent,
+                        EmptyBoxComponent,
+                        BoxPlotSeasonAgainstCRCComponent,
+                        EmptyBoxComponent,
+                        BoxPlotMonthsAgainstCasualComponent,
+                        EmptyBoxComponent,
+                        BoxPlotMonthsAgainstRegisteredComponent,
+                        EmptyBoxComponent,
+                        BoxPlotMonthsAgainstCntComponent,
+                        EmptyBoxComponent,
+                        BoxPlotWeekdayAgainstCasualComponent,
+                        EmptyBoxComponent,
+                        BoxPlotWeekdayAgainstRegisteredComponent,
+                        EmptyBoxComponent,
+                        BoxPlotWeekdayAgainstCntComponent,
+                        EmptyBoxComponent,
+                        BoxPlotHolidayAgainstCRCComponent,
+                        EmptyBoxComponent,
+                        BoxPlotWorkingDayAgainstCRCComponent,
+                        EmptyBoxComponent,
+                        BoxPlotWeatherAgainstCRCComponent,
+                        EmptyBoxComponent,
+                        ScatterPlotTempAgainstCRCComponent,
+                        EmptyBoxComponent,
+                        ScatterPlotATempAgainstCRCComponent,
+                        EmptyBoxComponent,
+                        ScatterPlotHumidityAgainstCRCComponent,
+                        EmptyBoxComponent,
+                        ScatterPlotWindSpeedAgainstCRCComponent,
+                        EmptyBoxComponent
+
                     ]
                     , className='Main-background')
 
