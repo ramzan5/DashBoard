@@ -136,13 +136,13 @@ BoxPlotFigureForCasualRegisteredAndCnt = dv.BoxPlotForCasualRegisteredAndTotalBi
 
 # Details for Casual Bikes Model
 
-DetailInformationForCasualBikeModel = 'The above Machine Simulation Tool can be used to Predict the value of Casual. The model that we have implemented on our dataset is the Random Forest Regression Model. We tried different Models and Techniques as well but we achieved the maximum accuracy with this Model. The accuracy of this model is ' + \
-    str(round(ScoresForCasualBikes*100, 2)) + '.So, it is a pretty accurate model as we were expecting. After a lot of trials and errors, we came up with this model and the Features to use in it. With the sliders, you can try different values and use it to predict the Cnt for Casual Bikes. The chart in top right shows the most significant Features of our model which are contributing most in the model'
+DetailInformationForCasualBikeModel = 'The above Machine Simulation Tool can be used to Predict the Numbers of Bikes Shared Casually. We used the Random Forest Regression Model to analyze the data in our dataset. We experimented with other models and techniques, but this model provided the highest level of accuracy. The accuracy of this model is ' + \
+    str(round(ScoresForCasualBikes*100, 2)) + '.So, It is a rather realistic model, which is what we anticipated.. After a lot of trials and errors, we came up with this model and the Features to use in it. With the sliders, you can try different values and use it to predict the Numbers of Bikes Shared Casually. The chart in top right shows the most significant Features of our model which are contributing in the model'
 
 
 # Details for Registered Bikes Model
 
-DetailInformationForRegisteredBikeModel = 'The above Machine Simulation Tool can be used to Predict the value of Registered Bikes. The model that we have implemented on our dataset is the Random Forest Regression Model. We tried different Models and Techniques as well but we achieved the maximum accuracy with this Model. The accuracy of this model is ' + \
+DetailInformationForRegisteredBikeModel = 'The above Machine Simulation Tool can be used to Predict the value of Registered Bikes. The model that we have implemented on our dataset is the Random Forest Regression Model. We tried different models and techniques as well but we achieved the maximum accuracy with this Model. The accuracy of this model is ' + \
     str(round(ScoresForRegisteredBikes*100, 2)) + '.So, it is a pretty accurate model as we were expecting. After a lot of trials and errors, we came up with this model and the Features to use in it. With the sliders, you can try different values and use it to predict the Numbers for Registered Bikes. The chart in top right shows the most significant Features of our model which are contributing most in the model'
 
 # ---------------------------Distribution Column Figures -----------------------------------------
@@ -196,6 +196,16 @@ FigureForDrawScatterPoltWindSpeedAgainstCRC = dv.DrawScatterPoltWindSpeedAgainst
     UpdatedDataFrame)
 
 # -------------------------------------------------------------------------------------------------------
+
+# -----------------------------------------3D Scatter Graphs ---------------------------------------------------
+FigureFor3dSeasonCasualCnt = dv.Draw3dScatterPlotForSeasonCasulCnt(UpdatedDataFrame)
+FigureFor3dSeasonRegisteredCnt = dv.Draw3dScatterPlotForSeasonRegisteredCnt(UpdatedDataFrame)
+FigureFor3dMonthsCasualCnt = dv.Draw3dScatterPlotForMonthsCasulCnt(UpdatedDataFrame)
+FigureFor3dMonthsRegisteredCnt = dv.Draw3dScatterPlotForMonthsRegisteredCnt(UpdatedDataFrame)
+FigureFor3dTempCasualCnt = dv.Draw3dScatterPlotForTempCasualCnt(UpdatedDataFrame)
+FigureFor3dTempRegisteredCnt = dv.Draw3dScatterPlotForTempRegisteredCnt(UpdatedDataFrame)
+# ---------------------------------------------------------------------------------------------------------------
+
 
 # -----------------------------Making the Slider for each Significant Value so User can manupulate and Predict value (Casual)-----
 SliderForWorkingDayLabel = FeatureImportanceForCasual.index[0]
@@ -326,7 +336,7 @@ CasualBikeDisplayComponent = html.Div([
                         "DataSet Detalis",
                         id="collapse-btn-casual",
                         color="primary",
-                        className="mb-3"
+                        className="btn-showing-detail"
                     ),
                     dbc.Collapse(
                         dbc.Card(
@@ -449,31 +459,6 @@ RegisteredBikeDisplayComponent = html.Div([
                 html.Div(html.P(id='prediction-result-regis',
                                 className='predict-cnt-div')),
             ], className='div1'),
-            # --------   Row Colum Information div Container--------
-            html.Div([
-                html.Div([
-                    dbc.Button(
-                        "DataSet Detalis",
-                        id="collapse-row-info-cnt-btn",
-                        color="primary",
-                        className="mb-3"
-                    ),
-                    dbc.Collapse(
-                        dbc.Card(
-                            dbc.CardBody(
-                                [
-                                    html.P(
-                                        "Number of the Columns in DataSet: " + str(NumOfColumns), className='text-btn'),
-                                    html.P("Number of the Rows in DataSet: " +
-                                           str(NumOfRows), className='text-btn')
-                                ]
-                            ),
-                            style={'margin': 8}),
-                        id="collapse-cnt-info",
-                    ),
-                ]
-                ),
-            ], className='div1')
         ], width=4),
         dbc.Col([
             html.Div([
@@ -723,6 +708,109 @@ ScatterPlotWindSpeedAgainstCRCComponent = html.Div([
 ], className='scatter-plot-graph')
 
 
+# 3D Graph Scatter Plot for Season Casual Registered
+
+ScatterPlotForSeasonCasualCntComponet = html.Div([
+    dcc.Graph(
+        figure=FigureFor3dSeasonCasualCnt,
+        style={'margin': 10}
+    )
+], className='graph-3d-div')
+
+# 3D Graph Scatter Plot for Season Registered Cnt
+
+ScatterPlotForSeasonRegisteredCntComponet = html.Div([
+    dcc.Graph(
+        figure=FigureFor3dSeasonRegisteredCnt,
+        style={'margin': 10}
+    )
+], className='graph-3d-div')
+
+# 3D Graph Scatter Plot for Months Casual Cnt
+
+ScatterPlotForMonthsCasualCntComponet = html.Div([
+    dcc.Graph(
+        figure=FigureFor3dMonthsCasualCnt,
+        style={'margin': 10}
+    )
+], className='graph-3d-div')
+
+# 3D Graph Scatter Plot for Months Registered Cnt
+
+ScatterPlotForMonthsRegisteredCntComponet = html.Div([
+    dcc.Graph(
+        figure=FigureFor3dMonthsRegisteredCnt,
+        style={'margin': 10}
+    )
+], className='graph-3d-div')
+
+# 3D Graph Scatter Plot for Temp Casual Cnt
+
+ScatterPlotForTempCasualCntComponet = html.Div([
+    dcc.Graph(
+        figure=FigureFor3dTempCasualCnt,
+        style={'margin': 10}
+    )
+], className='graph-3d-div')
+
+# 3D Graph Scatter Plot for Temp Registered Cnt
+
+ScatterPlotForTempRegisteredCntComponet = html.Div([
+    dcc.Graph(
+        figure=FigureFor3dTempRegisteredCnt,
+        style={'margin': 10}
+    )
+], className='graph-3d-div')
+
+# Footer Component
+
+FooterComponet = html.Footer(
+    html.Div([
+        html.Ul([
+            html.Li(
+                [html.A(
+                    html.Img(
+                        src=app.get_asset_url('github.png')),
+                    href="https://github.com/ramzan5")
+                 ]),
+
+            html.Li(
+                [html.A(
+                    html.Img(
+                        src=app.get_asset_url('linkedIn.png')),
+                    href="https://www.linkedin.com/in/muhammad-ramzan-a93710183/")
+                 ]),
+
+            html.Li(
+                [html.A(
+                    html.Img(
+                        src=app.get_asset_url('facebook.png')),
+                    href="https://m.facebook.com/100022831925923")
+                 ]),
+
+            html.Li(
+                [html.A(
+                    html.Img(
+                        src=app.get_asset_url('instagram.png')),
+                    href="https://www.instagram.com/ramzancs/")
+                 ]),
+            html.Li(
+                [html.A(
+                    html.Img(
+                        src=app.get_asset_url('twitter.png')),
+                    href="https://twitter.com/ramzanmech")
+                 ]),
+            html.Li(
+                [html.A(
+                    html.Img(
+                        src=app.get_asset_url('gmail.png')),
+                    href="mailto:ramzanmechanical@gmail.com")
+                 ]),
+
+        ])
+    ], className='list-items'),
+    className='footer'
+)
 
 # Main Layout
 
@@ -778,7 +866,19 @@ app.layout = html.Div(
                         ScatterPlotHumidityAgainstCRCComponent,
                         EmptyBoxComponent,
                         ScatterPlotWindSpeedAgainstCRCComponent,
-                        EmptyBoxComponent
+                        EmptyBoxComponent,
+                        ScatterPlotForSeasonCasualCntComponet,
+                        EmptyBoxComponent,
+                        ScatterPlotForSeasonRegisteredCntComponet,
+                        EmptyBoxComponent,
+                        ScatterPlotForMonthsCasualCntComponet,
+                        EmptyBoxComponent,
+                        ScatterPlotForMonthsRegisteredCntComponet,
+                        EmptyBoxComponent,
+                        ScatterPlotForTempCasualCntComponet,
+                        EmptyBoxComponent,
+                        ScatterPlotForTempRegisteredCntComponet,
+                        FooterComponet,
 
                     ]
                     , className='Main-background')
