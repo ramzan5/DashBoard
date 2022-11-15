@@ -38,7 +38,7 @@
     font-size: 14px;
     font-weight: bold;
 }
-.mb-3{
+.btn-showing-detail{
     color: white;
     background-color: #2f0452;
     margin-left: 20px;
@@ -152,4 +152,48 @@
         margin: 10px 15px 25px 25px;
         background-color: rgb(97, 97, 97);
         border-radius: 10px;
+}
+
+.footer {
+    background-color: #2f0452;
+    width: 100%;
+}
+
+.list-items {
+    padding: 1% 10%;
+}
+
+.list-items ul {
+    padding-top: 2%;
+    margin-left: 10%;
+}
+
+.list-items li a {
+    list-style: none;
+}
+
+.list-items li {
+    display: inline;
+    padding: 4%;
+}
+
+.list-items a:hover {
+    text-decoration: none;
+    background-color: none;
+}
+
+.list-items img {
+    width: 5%;
+}
+
+.list-items img:hover {
+    background-color: white;
+    border-radius: 50%;
+}
+
+.graph-3d-div{
+        height: 500px;
+            margin: 10px 15px 25px 25px;
+            background-color: rgb(97, 97, 97);
+            border-radius: 10px;
 }
