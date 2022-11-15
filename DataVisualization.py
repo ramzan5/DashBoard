@@ -1,3 +1,4 @@
+import plotly.express as px
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 from mpl_toolkits.mplot3d import Axes3D
@@ -53,8 +54,29 @@ def DrawFeatureImportanceGraph(DataFrame):
 
 # DrawFeatureImportanceGraph(newdf)
 
+# Box-Plot for Casual Registered and Total Numbers of bikes
+
+
+def BoxPlotForCasualRegisteredAndTotalBikes(DataFrame):
+    if type(DataFrame).__name__ != "DataFrame":
+        raise Exception("Oops! It is Not a DataFrame")
+
+    fig = go.Figure()
+    fig.add_trace(go.Box(y=DataFrame['casual'],
+                  name="Casual Bikes", marker_color='purple'))
+    fig.add_trace(go.Box(
+        y=DataFrame['registered'], name="Registered Bikes", marker_color='black'))
+    fig.add_trace(go.Box(y=DataFrame['cnt'],
+                  name="Total Bikes", marker_color='brown'))
+    fig.update_layout(title_text="Box Plot for Bikes",
+                      title_x=0.5, height=500, xaxis_title="Column Variables",
+                      yaxis_title="Distribution")
+    return fig
+# -----------------------------------------------------------------------------------------------------
+# BoxPlotForCasualRegisteredAndTotalBikes(newdf)
 
 # ---------------------------------------Distribution Plot For Seasons---------------------------------
+
 
 def SeasonDistributionColumn(DataFrame):
     if type(DataFrame).__name__ != "DataFrame":
@@ -62,9 +84,9 @@ def SeasonDistributionColumn(DataFrame):
     XLabels = ['Winter', 'Spring', 'Summer', 'Fall']
     YLabels = (DataFrame['season'].value_counts()).tolist()
     fig = go.Figure()
-    fig.add_trace(go.Bar(x=XLabels, y=YLabels, marker_color='blue'))
+    fig.add_trace(go.Bar(x=XLabels, y=YLabels, marker_color='purple'))
     fig.update_layout(title_text='Distribution Plot Of Seasons',
-                      title_x=0.5, height=600, width=800)
+                      title_x=0.5, height=500, width=600)
     return fig
 
 # SeasonDistributionColumn(newdf)
@@ -100,7 +122,7 @@ def MonthsDistributionColumn(DataFrame):
     fig = go.Figure()
     fig.add_trace(go.Bar(x=XLabels, y=YLabels, marker_color='purple'))
     fig.update_layout(title_text='Distribution Plot Of Months',
-                      title_x=0.7, height=500, width=600)
+                      title_x=0.7, height=500, width=1225)
     return fig
 
 # MonthsDistributionColumn(newdf)
@@ -293,7 +315,7 @@ def DrawChartMonthsAgianstCasual(Dataframe):
     fig.add_trace(
         go.Box(x=DataFrame['mnth'], y=DataFrame['casual'], marker_color='olive'))
     fig.update_layout(title_text='Box Plot Of Months aginst Numbers of Bikes Casual',
-                      title_x=0.7, height=700, width=1200)
+                      title_x=0.7, height=500)
     return fig
 
 # DrawChartMonthsAgianstCasual(newdf)
@@ -322,7 +344,7 @@ def DrawChartMonthsAgianstRegistered(Dataframe):
     fig.add_trace(
         go.Box(x=DataFrame['mnth'], y=DataFrame['registered'], marker_color='blue'))
     fig.update_layout(title_text='Box Plot Of Months aginst Numbers of Bikes (Registered)',
-                      title_x=0.7, height=700, width=1200)
+                      title_x=0.7, height=500)
     return fig
 
 
@@ -352,7 +374,7 @@ def DrawChartMonthsAgianstCnt(Dataframe):
     fig.add_trace(
         go.Box(x=DataFrame['mnth'], y=DataFrame['cnt'], marker_color='purple'))
     fig.update_layout(title_text='Box Plot Of Months aginst Numbers of Bikes (Total)',
-                      title_x=0.7, height=700, width=1200)
+                      title_x=0.7, height=500)
     return fig
 
 
@@ -378,7 +400,7 @@ def DrawChartWeekdayAgianstCasual(Dataframe):
     fig.add_trace(
         go.Box(x=DataFrame['weekday'], y=DataFrame['casual'], marker_color='teal'))
     fig.update_layout(title_text='Box Plot Of Days of Week aginst Numbers of Bikes (Casual)',
-                      title_x=0.7, height=700, width=1200)
+                      title_x=0.7, height=500)
     return fig
 
 # DrawChartWeekdayAgianstCasual(newdf)
@@ -397,7 +419,7 @@ def DrawChartWeekdayAgianstRegisterd(Dataframe):
     fig.add_trace(
         go.Box(x=DataFrame['weekday'], y=DataFrame['registered'], marker_color='salmon'))
     fig.update_layout(title_text='Box Plot Of Days of Week aginst Numbers of Bikes (Registered)',
-                      title_x=0.7, height=700, width=1200)
+                      title_x=0.7, height=500)
     return fig
 
 # DrawChartWeekdayAgianstRegisterd(newdf)
@@ -417,7 +439,7 @@ def DrawChartWeekdayAgianstCnt(Dataframe):
     fig.add_trace(
         go.Box(x=DataFrame['weekday'], y=DataFrame['cnt'], marker_color='royalblue'))
     fig.update_layout(title_text='Box Plot Of Days of Week aginst Numbers of Bikes (Total)',
-                      title_x=0.7, height=700, width=1200)
+                      title_x=0.7, height=500)
     return fig
 
 # DrawChartWeekdayAgianstCnt(newdf)
@@ -635,7 +657,7 @@ def DrawScatterPoltHumidityAgainstCRC(DataFrame):
     fig.update_yaxes(title_text="Casual Bike", row=1, col=1)
     fig.update_yaxes(title_text="Registered Bike", row=1, col=2)
     fig.update_yaxes(title_text="Cnt Total Bike", row=1, col=3)
-    return fig.show()
+    return fig
 
 # DrawScatterPoltHumidityAgainstCRC(newdf)
 
@@ -670,8 +692,125 @@ def DrawScatterPoltWindSpeedAgainstCRC(DataFrame):
     fig.update_yaxes(title_text="Casual Bike", row=1, col=1)
     fig.update_yaxes(title_text="Registered Bike", row=1, col=2)
     fig.update_yaxes(title_text="Cnt Total Bike", row=1, col=3)
-    return fig.show()
+    return fig
 
 
 # DrawScatterPoltWindSpeedAgainstCRC(newdf)
 # ---------------------------------------------------------------------------------------------------------------------------
+
+
+# 3d Graph for given Data set
+
+def Draw3dGraphForBikeSharing(DataFrame):
+    if type(DataFrame).__name__ != "DataFrame":
+        raise Exception("Oops! It is Not a DataFrame")
+
+    fig = go.Figure(data=[go.Surface(z=DataFrame)])
+    fig.update_layout(title='3D Graphical Representation', autosize=False,
+                      height=500,
+                      margin=dict(l=65, r=50, b=65, t=90))
+    return fig
+
+# Draw3dGraphForBikeSharing(newdf)
+
+# ---------------------------------------------------------------------------------------------------------
+
+
+# -----------------------Draw 3D Scatter Plot for Bike Sharing Season  Casual Cnt ------------
+
+def Draw3dScatterPlotForSeasonCasulCnt(DataFrame):
+    if type(DataFrame).__name__ != "DataFrame":
+        raise Exception("Oops! It is Not a DataFrame")
+    df = DataFrame[['season', 'casual', 'cnt']]
+    fig = px.scatter_3d(df, x='cnt', y='casual', z='season',
+                        color='cnt')
+    fig.update_layout(title_text='3D Scatter Plot for Season Casual and Cnt',
+                      title_x=0.5, height=500)
+    return fig
+
+# Draw3dScatterPlotForSeasonCasulCnt(newdf)
+# -------------------------------------------------------------------------------------------
+
+# ---------------------------Draw 3D Scatter Plot for Bike Sharing Season Registered and Total------
+
+
+def Draw3dScatterPlotForSeasonRegisteredCnt(DataFrame):
+    if type(DataFrame).__name__ != "DataFrame":
+        raise Exception("Oops! It is Not a DataFrame")
+    df = DataFrame[['season', 'registered', 'cnt']]
+    fig = px.scatter_3d(df, x='season', y='registered', z='cnt',
+                        color='cnt')
+    fig.update_layout(title_text='3D Scatter Plot for Season Registered and Cnt',
+                      title_x=0.5, height=500)
+    return fig
+
+
+# Draw3dScatterPlotForSeasonRegisteredCnt(newdf)
+
+
+# ------------------------------------ 3d Scatter Plot for Bike Sharing Month Casual Cnt ---------------
+
+def Draw3dScatterPlotForMonthsCasulCnt(DataFrame):
+    if type(DataFrame).__name__ != "DataFrame":
+        raise Exception("Oops! It is Not a DataFrame")
+    df = DataFrame[['mnth', 'casual', 'cnt']]
+    fig = px.scatter_3d(df, x='mnth', y='casual', z='cnt',
+                        color='cnt')
+    fig.update_layout(title_text='3D Scatter Plot for Months Casual and Cnt',
+                      title_x=0.5, height=500)
+    return fig
+
+
+# Draw3dScatterPlotForMonthsCasulCnt(newdf)
+
+# --------------------------------------------------------------------------------------------------------
+
+# ------------------------------------ 3d Scatter Plot for Bike Sharing Month Registered Cnt ---------------
+
+def Draw3dScatterPlotForMonthsRegisteredCnt(DataFrame):
+    if type(DataFrame).__name__ != "DataFrame":
+        raise Exception("Oops! It is Not a DataFrame")
+    df = DataFrame[['mnth', 'registered', 'cnt']]
+    fig = px.scatter_3d(df, x='mnth', y='registered', z='cnt',
+                        color='cnt')
+    fig.update_layout(title_text='3D Scatter Plot for Months Registered and Cnt',
+                      title_x=0.5, height=500)
+    return fig
+
+
+# Draw3dScatterPlotForMonthsRegisteredCnt(newdf)
+
+# --------------------------------------------------------------------------------------------------------
+
+# -------------------------3d Scatter Plot of Temp , Casual , Total Cnt of Bikes--------------------------
+
+def Draw3dScatterPlotForTempCasualCnt(DataFrame):
+    if type(DataFrame).__name__ != "DataFrame":
+        raise Exception("Oops! It is Not a DataFrame")
+    df = DataFrame[['temp', 'casual', 'cnt']]
+    fig = px.scatter_3d(df, x='temp', y='casual', z='cnt',
+                        color='temp')
+    fig.update_layout(title_text='3D Scatter Plot for Temp Casual and Cnt',
+                      title_x=0.5, height=500)
+    return fig
+
+# Draw3dScatterPlotForTempCasualCnt(newdf)
+
+# ------------------------------------------------------------------------------------------------------------
+
+# -------------------------3d Scatter Plot of Temp , Registered , Total Cnt of Bikes--------------------------
+
+
+def Draw3dScatterPlotForTempRegisteredCnt(DataFrame):
+    if type(DataFrame).__name__ != "DataFrame":
+        raise Exception("Oops! It is Not a DataFrame")
+    df = DataFrame[['temp', 'registered', 'cnt']]
+    fig = px.scatter_3d(df, x='temp', y='registered', z='cnt',
+                        color='cnt')
+    fig.update_layout(title_text='3D Scatter Plot for Temp Registered and Cnt',
+                      title_x=0.5, height=500)
+    return fig
+
+# Draw3dScatterPlotForTempRegisteredCnt(newdf)
+
+# ------------------------------------------------------------------------------------------------------------
